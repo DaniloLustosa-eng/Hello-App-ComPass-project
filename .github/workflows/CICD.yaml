@@ -31,8 +31,8 @@ jobs:
 
       - name: Atualiza deployment.yaml com nova imagem
         run: |
-          sed -i 's|image:.*|image: '"${{ secrets.DOCKER_USERNAME }}/hello-app:latest"'|g' manifests/manifests/deployment.yaml
-          cd manifests/manifests
+          sed -i 's|image:.*|image: '"${{ secrets.DOCKER_USERNAME }}/hello-app:latest"'|g' manifests/deployment.yaml
+          cd manifests
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           if git diff --quiet; then
