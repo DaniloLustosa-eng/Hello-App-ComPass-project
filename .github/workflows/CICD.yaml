@@ -23,7 +23,7 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/hello-app:latest
 
-      - name: Checkout manifests repositorio
+      - name: Checkout do repositório de manifests
         uses: actions/checkout@v4
         with:
           repository: DaniloLustosa-eng/MANIFESTOS-AGCD-COMPASS
