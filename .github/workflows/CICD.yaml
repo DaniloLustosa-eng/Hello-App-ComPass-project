@@ -18,7 +18,6 @@ jobs:
       - name: Build da imagem Docker
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/hello-app:latest .
-
       - name: Push da imagem Docker
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/hello-app:latest
@@ -36,8 +35,12 @@ jobs:
           cd manifests
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git commit -am "Atualizando imagem para nova versão"
-          git push origin main
+          if git diff --quiet; then
+            echo "Nenhuma mudança detectada. Nada para commitar."
+          else
+            git commit -am "Atualizando imagem para nova versão"
+            git push origin main
+          fi
 
 
 
