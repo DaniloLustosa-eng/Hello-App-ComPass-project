@@ -2,6 +2,7 @@
 ##  Introdução 📜
 O projeto tem como objetivo automatizar o ciclo completo de desenvolvimento, build, deploy e execução de uma aplicação FastAPI simples, usando GitHub Actions para CI/CD, Docker Hub como registry e ArgoCD para entrega contínua em Kubernetes local com Rancher Desktop.
 ---
+ 🔗[Repositório dos manifests do Kubernetes](https://github.com/DaniloLustosa-eng/MANIFESTOS-AGCD-COMPASS.git)
 ## Tecnologias Utilizadas 🛠️
 **Git**: Controle de versão do código fonte.  
 **GitHub Actions**: Para automação do CI/CD.  
@@ -68,6 +69,7 @@ jobs:
 - `SSH_PRIVATE_KEY`: Sua chave privada SSH para acessar o repositório de manifests do ArgoCD.
 
    **⚠️​⚠️Observação: a chave SSH será ensinada mais à frente, com instruções de como criá-la.⚠️​⚠️**
+   
 ![alt text](images/image2.png)
 ## -1.3 Criação dos arquivos .py, .txt e do Dockerfile para construção da imagem.📂
 **Crie os seguintes arquivos no repositório:**
@@ -120,7 +122,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: danilouser/hello-app:1753292448
+        image: <YOUR_DOCKER_USERNAME>/hello-app:env.IMAGE_TAG
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -168,6 +170,11 @@ kubectl get svc hello-app-service -n argocd
 ``` 
 **Acesse a aplicação pelo navegador:**
 ![alt text](images/image4.png)
+**Quando fazemos um pull request, o workflow é acionado e a imagem é atualizada automaticamente.**
+![alt text](images/image7.png) 
+![alt text](images/image6.png)
+## Conclusão 🎉
+Parabéns! Você configurou um pipeline de CI/CD completo para uma aplicação FastAPI usando GitHub Actions, Docker Hub e ArgoCD. Agora, sempre que você fizer um push ou pull request no repositório, a imagem Docker será atualizada e o ArgoCD fará o deploy automático da nova versão da aplicação.
 
 
 
